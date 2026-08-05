@@ -13,7 +13,11 @@ components/     shared UI component boundary
 ```
 
 ## Current status
-The Refine/Next.js foundation is installed and the dashboard vertical slice includes project cards, search, responsive layout, PWA manifest, and typed integration boundaries. Supabase OAuth, live GitHub synchronization and AI streaming require environment configuration and backend route implementation before production use.
+The Refine/Next.js foundation is installed and the dashboard loads the five visible application projects from the canonical Supabase `project_management.projects` registry: Parallax Studio, CostaPulse, WildSkyRide, BankruptTo1Million and Hermes PWA. Supabase OAuth, live GitHub synchronization and AI streaming require environment configuration and backend route implementation before production use.
+
+## Deployment
+
+Deployment is exclusively through Dokploy. The repository includes a production multi-stage Dockerfile, Compose configuration, Docker ignore rules, healthcheck and Dokploy runbook. See [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Commands
 
