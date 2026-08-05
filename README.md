@@ -13,7 +13,7 @@ components/     shared UI component boundary
 ```
 
 ## Current status
-The Refine/Next.js foundation is installed and the dashboard loads the five visible application projects from the canonical Supabase `project_management.projects` registry: Parallax Studio, CostaPulse, WildSkyRide, BankruptTo1Million and Hermes PWA. Supabase OAuth, live GitHub synchronization and AI streaming require environment configuration and backend route implementation before production use.
+The Refine/Next.js foundation is installed and the dashboard loads every project from the canonical Supabase `project_management.projects` registry. The card grid, count, search and project detail context therefore update when projects are added or removed in the database. Supabase OAuth, live GitHub synchronization and AI streaming require environment configuration and backend route implementation before production use.
 
 ## Deployment
 
