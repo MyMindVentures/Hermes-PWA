@@ -1,0 +1,16 @@
+{
+  "name": "hermes-pwa",
+  "private": true,
+  "version": "0.2.0",
+  "packageManager": "pnpm@10.12.4",
+  "scripts": {
+    "dev": "pnpm --filter @hermes/dashboard dev",
+    "build": "pnpm --filter @hermes/dashboard build",
+    "lint": "pnpm --filter @hermes/dashboard lint",
+    "typecheck": "pnpm --filter @hermes/dashboard typecheck",
+    "test": "pnpm --filter @hermes/dashboard test",
+    "test:e2e": "pnpm --filter @hermes/dashboard test:e2e"
+  },
+  "workspaces": ["apps/*", "packages/*"],
+  "devDependencies": {"typescript":"^5.9.3"}
+}

@@ -1,0 +1,26 @@
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+playwright-report/
+test-results/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.turbo/
+
+# Refine foundation caches
+.nx/
+.cypress/
+
+# Local Prisma artifacts
+apps/api/prisma/*.db
+apps/api/prisma/*.db-journal
+
+# IDE
+.vscode/
+.idea/

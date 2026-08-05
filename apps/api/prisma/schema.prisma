@@ -1,0 +1,81 @@
+// This schema is retained only as an optional typed server ORM mapping.
+// Supabase migrations and RLS are the source of truth for Hermes AI.
+// The canonical project registry remains project_management.projects.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["hermes_pwa", "project_management"]
+}
+
+model Project {
+  id             String @id @db.Uuid
+  projectKey     String @map("project_key")
+  name           String
+  description    String?
+  progress       Decimal @map("progress_percent")
+  @@map("projects")
+  @@schema("project_management")
+}
+
+model ProjectAccess {
+  projectId String @map("project_id") @db.Uuid
+  userId    String @map("user_id") @db.Uuid
+  role      String @map("access_role")
+  @@id([projectId, userId])
+  @@map("project_access")
+  @@schema("hermes_pwa")
+}
+
+model GithubRepository {
+  id             String @id @default(uuid()) @db.Uuid
+  projectId      String @map("project_id") @db.Uuid
+  repositoryKey  String @map("repository_key")
+  provider       String
+  owner          String
+  name           String
+  defaultBranch String? @map("default_branch")
+  syncStatus     String @map("sync_status")
+  syncedAt       DateTime? @map("synced_at")
+  @@unique([projectId, repositoryKey])
+  @@map("github_repositories")
+  @@schema("hermes_pwa")
+}
+
+model Chat {
+  id        String @id @default(uuid()) @db.Uuid
+  projectId String @map("project_id") @db.Uuid
+  userId    String @map("user_id") @db.Uuid
+  title     String?
+  modelKey  String? @map("model_key")
+  @@map("chats")
+  @@schema("hermes_pwa")
+}
+
+model Message {
+  id        String @id @default(uuid()) @db.Uuid
+  chatId    String @map("chat_id") @db.Uuid
+  projectId String @map("project_id") @db.Uuid
+  userId    String @map("user_id") @db.Uuid
+  role      String
+  content   String
+  @@map("messages")
+  @@schema("hermes_pwa")
+}
+
+model Setting {
+  userId     String @map("user_id") @db.Uuid
+  projectId  String? @map("project_id") @db.Uuid
+  theme      String
+  preferences Json
+  @@id([userId, projectId])
+  @@map("settings")
+  @@schema("hermes_pwa")
+}
+
+// GitHub issues, pull requests and sync runs are intentionally accessed via typed Supabase/server gateways.
+// Every query must preserve the same project_access authorization boundary.
