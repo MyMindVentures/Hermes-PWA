@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #090d18; }
+button { cursor: pointer; }
+input::placeholder { color: #64748b; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+.help { color: #94a3b8; }
