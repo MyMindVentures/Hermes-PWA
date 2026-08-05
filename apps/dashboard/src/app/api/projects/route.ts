@@ -17,7 +17,7 @@ export async function GET() {
   if (userError || !user.user) return Response.json({ error: "Unauthorized" }, { status: 401 });
 
   const adminClient = createClient(url, serviceRoleKey, { db: { schema: "project_management" }, auth: { autoRefreshToken: false, persistSession: false } });
-  const { data, error } = await adminClient.from("projects").select("id, project_key, name, description, progress_percent, metadata").eq("metadata->>visible", "true").order("created_at");
+  const { data, error } = await adminClient.from("projects").select("id, project_key, name, description, progress_percent, metadata").order("created_at");
   if (error) return Response.json({ error: "Unable to load projects" }, { status: 500 });
   return Response.json({ data: data.map((project) => ({ ...project, status: "Active" })) });
 }
