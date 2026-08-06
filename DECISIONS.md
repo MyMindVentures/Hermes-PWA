@@ -58,5 +58,17 @@
 - https://github.com/octokit/octokit.js
 
 ## Verification status
-
 Backend schema migration and security boundary: verified. Application integration and production deployment: pending.
+
+## ADR-009 — Premium SaaS workspace redesign
+- **Decision:** Reframe the dashboard as a calm, high-density project workspace: persistent desktop navigation, responsive mobile navigation, clear page hierarchy, restrained indigo/cyan accent use, and explicit loading/error/empty states.
+- **Reason:** The previous screen was a single dense dark canvas with weak navigation hierarchy, hardcoded secondary metrics, and limited interaction affordance. A premium SaaS experience needs predictable navigation, stronger grouping, accessible controls, and visual trust signals.
+- **Alternatives rejected:** Decorative-only color refresh; replacing the existing data boundary with static demo content; introducing a new component library for a visual problem that Tailwind and the existing icon dependency can solve.
+- **Evidence:** Local UI inspection of `apps/dashboard/src/components/project-dashboard.tsx`, `globals.css`, login and project detail routes; Next.js styling guidance and WCAG 2.2 focus-visible guidance consulted on 2026-08-05.
+- **Scope:** Dashboard shell, project overview, login surface, and project-detail presentation. Backend contracts and canonical project loading remain unchanged.
+
+## ADR-010 — Database-backed dashboard signals
+- **Decision:** Derive all dashboard metrics and project operational signals at the server API boundary from the canonical project registry, task/activity tables, GitHub read models and chat records.
+- **Reason:** Hardcoded metrics and demo activity misrepresent system state and violate the canonical-database rule. Empty data must remain truthful rather than being replaced with placeholders.
+- **Alternatives rejected:** Static demo metrics, browser-side joins over privileged tables, and fabricated fallback records.
+- **Evidence:** Live Supabase schema and row inspection on 2026-08-05; `/api/projects` now returns typed project, activity and totals records.

@@ -42,5 +42,12 @@ The PWA is a module in the existing Hermes AI Supabase project `kjjiufximimaxbei
 ## Current gap
 The database module is applied and verified. Live application API routes, GitHub sync Edge Functions, AI streaming, OAuth provider configuration and contract tests remain before production readiness.
 
+## UI/UX redesign boundary
+- `ProjectDashboard` owns the authenticated workspace shell, project registry loading, filtering, and responsive navigation presentation.
+- Shared visual primitives remain local to the dashboard until repeated use justifies extraction into `components/ui`.
+- The redesign deliberately preserves the existing `/api/projects` contract and does not invent metrics that are not available from the canonical registry; unavailable secondary metrics are presented as contextual placeholders only where the current product surface already promises them.
+- Accessibility baseline: semantic landmarks, labelled controls, visible keyboard focus, reduced-motion support, touch-friendly controls, and responsive layouts from mobile through wide desktop.
+- Dashboard metrics, project status, repository labels, task/issue/PR counts, activity feed and conversation totals are derived by the authenticated `/api/projects` boundary from the canonical `project_management` and `hermes_pwa` tables. The browser must not fabricate operational data; unavailable records render explicit empty/unavailable states.
+
 ## Sources
 See `DECISIONS.md` for source-backed choices.
