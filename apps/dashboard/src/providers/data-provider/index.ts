@@ -13,5 +13,44 @@ export const dataProvider: DataProvider = {
   getApiUrl: () => API_URL,
 };
 
-export type ProjectStatus = "online" | "development" | "offline";
-export type Project = { id: string; name: string; description: string; status: ProjectStatus; technologies: string[]; openIssues: number; progress: number; hermesStatus: "ready" | "syncing" | "attention" };
+export type ProjectStatus = "active" | "planned" | "paused" | "retired" | "unknown";
+export type HermesStatus = "ready" | "syncing" | "attention" | "unavailable";
+
+export type Project = {
+  id: string;
+  projectKey: string;
+  name: string;
+  description: string | null;
+  category: string | null;
+  status: ProjectStatus;
+  statusLabel: string;
+  technologies: string[];
+  openIssues: number;
+  openTasks: number;
+  openPullRequests: number;
+  progress: number;
+  hermesStatus: HermesStatus;
+  activityCount: number;
+  lastActivityAt: string | null;
+};
+
+export type ProjectActivity = {
+  id: string;
+  projectId: string;
+  projectName: string;
+  activityType: string;
+  summary: string;
+  occurredAt: string;
+};
+
+export type ProjectDashboardResponse = {
+  data: Project[];
+  activity: ProjectActivity[];
+  totals: {
+    projects: number;
+    activeProjects: number;
+    openTasks: number;
+    openIssues: number;
+    conversations: number;
+  };
+};
