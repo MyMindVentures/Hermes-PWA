@@ -45,6 +45,6 @@
     "eslint": "^9.0.0",
     "playwright": "^1.55.0",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
+    "vitest": "^5.0.0"
   }
 }
